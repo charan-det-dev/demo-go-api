@@ -7,10 +7,10 @@ import (
 )
 
 type User struct {
-	ID        string `json:"ID"`
-	Name      string `json:"Name"`
-	Avatar    string `json:"Avatar"`
-	CreatedAt string `json:"CreatedAt"`
+	ID        string `json:"id"`
+	Name      string `json:"name"`
+	Avatar    string `json:"avatar"`
+	CreatedAt string `json:"createdAt"`
 }
 
 func main() {
