@@ -26,7 +26,7 @@ WORKDIR /app
 COPY --from=builder /app/main .
 
 # Expose the port that your application listens on
-EXPOSE 3000
+EXPOSE 8080
 
 # Command to run the executable
 CMD ["./main"]

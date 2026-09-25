@@ -1,12 +1,9 @@
-version: '3.8'
 services:
   demo-api-go:
-    image: demo-go-api # เปลี่ยนชื่อ image เป็น my-go-api
-    build: . # ใช้ Dockerfile ใน directory ปัจจุบัน
+    image: demo-go-api
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: demo-go-api
-    # image: demo-go-api # ชื่อ image ที่จะใช้
     ports:
-      - "8080:8080" # Map port 8080 บน host ไปยัง port 8080 ใน container
-    # ถ้ามี volume ที่ต้องการ mount
-    # volumes:
-    #   - ./your-go-code:/app
+      - "8080:8080"
