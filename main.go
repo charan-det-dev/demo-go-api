@@ -1,6 +1,8 @@
 package main
 
 import (
+	"encoding/json"
+	"fmt"
 	"log"
 
 	"github.com/gofiber/fiber/v2"
@@ -17,12 +19,24 @@ func main() {
 
 	app := fiber.New()
 
+	fmt.Println("API Ready...")
+
 	// GET /users endpoint
 	app.Get("/users", func(c *fiber.Ctx) error {
+
+		data, err := json.MarshalIndent(users(), "", " ")
+		if err != nil {
+
+			fmt.Println("Error marshalling users data:", err)
+			return err
+		}
+
+		fmt.Println(string(data))
+
 		return c.JSON(users())
 	})
 
-	log.Fatal(app.Listen(":3000"))
+	log.Fatal(app.Listen(":8080"))
 }
 
 func users() []User {
