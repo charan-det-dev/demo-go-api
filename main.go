@@ -23,6 +23,7 @@ func main() {
 
 	// GET /users endpoint
 	app.Get("/users", func(c *fiber.Ctx) error {
+		fmt.Println("GET /users endpoint called")
 
 		data, err := json.MarshalIndent(users(), "", " ")
 		if err != nil {
@@ -34,6 +35,24 @@ func main() {
 		fmt.Println(string(data))
 
 		return c.JSON(users())
+	})
+
+	app.Get("/users/:id", func(c *fiber.Ctx) error {
+		id := c.Params("id")
+
+		fmt.Println("GET /users/:id endpoint called with ID:", id)
+
+		for _, user := range users() {
+			if user.ID == id {
+
+				fmt.Println(user)
+				return c.JSON(user)
+			}
+		}
+
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+			"error": "User not found",
+		})
 	})
 
 	log.Fatal(app.Listen(":8080"))
